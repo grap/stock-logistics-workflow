@@ -19,37 +19,21 @@
 #
 ##############################################################################
 
-{'name': 'Delivery Orders Mass Assign',
- 'version': '0.2',
- 'author': "Camptocamp,GRAP,Odoo Community Association (OCA)",
- 'license': 'AGPL-3',
- 'category': 'Warehouse Management',
- 'depends': ['stock',
-             ],
- 'description': """
-Delivery Orders Mass Assign
-===========================
-
-Facilities to check the availability of delivery orders:
-
-* A wizard which allows on multiple delivery orders at a time to:
-    * check availability of Delivery Orders;
-    * force availability of Delivery Orders;
-    * process Pickings (deliver);
-
-* A scheduled action to check availability of all the delivery orders.
-  It is not active by default.
-
-This may be necessary for those who want to check the availability
-more often than running the procurement scheduler.
-
- """,
- 'website': 'http://www.camptocamp.com',
- 'data': ['wizard/check_assign_all_view.xml',
-          'cron_data.xml',
-          ],
- "test": ['test/test_check_assign_all.yml',
-          ],
- 'installable': True,
- 'auto_install': False,
- }
+{
+    'name': 'Stock Picking Mass Action',
+    'version': '1.0',
+    'author': 'Camptocamp,GRAP,Odoo Community Association (OCA)',
+    'website': 'https://github.com/OCA/stock-logistics-workflow/',
+    'license': 'AGPL-3',
+    'category': 'Warehouse Management',
+    'depends': [
+        'stock',
+    ],
+    'data': [
+        'wizard/mass_action_view.xml',
+        'data/ir_cron.xml',
+    ],
+    'test': [
+        'test/test_stock_picking_mass_action.yml',
+    ],
+}
