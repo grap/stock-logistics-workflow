@@ -50,6 +50,6 @@ more often than running the procurement scheduler.
           ],
  "test": ['test/test_check_assign_all.yml',
           ],
- 'installable': False,
+ 'installable': True,
  'auto_install': False,
  }
