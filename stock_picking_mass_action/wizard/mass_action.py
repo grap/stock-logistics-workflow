@@ -47,30 +47,30 @@ class StockPickingMassAction(TransientModel):
 
     confirm = fields.Boolean(
         string='Mark as Todo', default=True,
-        help="""check this box if you want to mark as Todo the"""
-        """ the selected Pickings.""")
+        help="check this box if you want to mark as Todo the"
+        " selected Pickings.")
 
     check_availability = fields.Boolean(
         string='Check Availability', default=_default_check_availability,
-        help="""check this box if you want to check the availability of"""
-        """ the selected Pickings.""")
+        help="check this box if you want to check the availability of"
+        " the selected Pickings.")
 
     force_availability = fields.Boolean(
         string='Force Availability', default=_default_force_availability,
-        help="""check this box if you want to force the availability"""
-        """ of the selected Pickings.""")
+        help="check this box if you want to force the availability"
+        " of the selected Pickings.")
 
     transfer = fields.Boolean(
         string='Transfer', default=_default_transfer,
-        help="""check this box if you want to transfer all the selected"""
-        """ pickings.\n You'll not have the possibility to realize a"""
-        """ partial transfer.\n If you want  to do that, please do it"""
-        """ manually on the picking form.""")
+        help="check this box if you want to transfer all the selected"
+        " pickings.\n You'll not have the possibility to realize a"
+        " partial transfer.\n If you want  to do that, please do it"
+        " manually on the picking form.""")
 
     create_invoice = fields.Boolean(
         'Create Invoices/Refunds', default=_default_create_invoice,
-        help="""check this box if you want to create Invoices or Refunds for"""
-        """ all the selected Pickings.""")
+        help="check this box if you want to create Invoices or Refunds for"
+        " all the selected Pickings.")
 
     @api.multi
     def mass_action(self):
@@ -113,10 +113,9 @@ class StockPickingMassAction(TransientModel):
         if self.create_invoice:
             domain = [('invoice_state', '=', '2binvoiced'),
                       ('id', 'in', picking_ids)]
-            to_invoice_picking_lst = picking_obj.search(
-                domain, order='min_date')
+            to_invoice_pickings = picking_obj.search(domain, order='min_date')
             ctx = self.env.context.copy()
-            ctx['active_ids'] = [x.id for x in to_invoice_picking_lst]
+            ctx['active_ids'] = to_invoice_pickings.ids
             return {
                 'name': _('Stock Invoice Onshipping'),
                 'view_type': 'form',
